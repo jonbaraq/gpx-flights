@@ -64,13 +64,10 @@ if __name__ == '__main__':
   configuration = GpxConfiguration(sys.argv[1])
   url = '%s%s' % (configuration.GetApiUrl(), configuration.GetApiKey())
   dates = GetDates()
-  for date in dates:
-    print '%s %s' % (date[0], date[1])
   gpx_request = GpxRequest(
       configuration.GetSource(), configuration.GetDestination(), dates)
 
   acceptable_offers = PriorityQueue()
-  index = 0
   for request in gpx_request.GetJsonRequests():
     url_req = urllib2.Request(url, request, {'Content-Type': 'application/json'})
     flight = urllib2.urlopen(url_req)
@@ -78,8 +75,6 @@ if __name__ == '__main__':
     flight.close()
     flights = response.GetFlights()
     for flight in flights:
-      print 'Option #%s: Price %s %s' % (index, flight.GetPrice(), flight.GetCurrency())
-      index += 1
       if flight.GetPrice() > configuration.GetThreshold():
         continue
       acceptable_offers.put([flight.GetPrice(), flight])

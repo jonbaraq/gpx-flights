@@ -42,7 +42,6 @@ class EmailSender:
     text += self._GetFlightContent(flights)
     content = MIMEText(text, 'plain')
     msg.attach(content)
-    print text
     s = smtplib.SMTP('localhost')
     s.sendmail(to, self.from_, msg.as_string())
     s.quit()
