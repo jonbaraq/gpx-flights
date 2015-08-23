@@ -1,0 +1,7 @@
+[GPX-Alert]
+API_KEY=test123
+API_URL=https://www.googleapis.com/qpxExpress/v1/trips/search?key=
+SOURCE=ZRH
+DESTINATION=MAD
+THRESHOLD=500
+EMAIL=foo@bar.com
